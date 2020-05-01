@@ -1,0 +1,32 @@
+
+version: '3'
+services: 
+  web:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    container_name: php74
+    volumes: 
+      - ./php:/var/www/html
+    ports:
+      - 8080:80
+    depends_on:
+      - dbos
+
+  dbos:
+    container_name: mysql
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: toor@ranjit
+      MYSQL_DATABASE: test_db 
+      MYSQL_USER: ranjit
+      MYSQL_PASSWORD: dbpass
+    ports:
+      - 6033:3306
+    volumes:
+      - ./mysql_st:/var/lib/mysql
+
+
+
+
